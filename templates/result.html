@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+</head>
+<body>
+    <h1>Quiz Results</h1>
+    <p>Your score: {{ score }} out of {{ total }}</p>
+
+    <h2>Feedback:</h2>
+    <ul>
+        {% for question, user_answer, feedback_text in zip(questions, user_answers, feedback) %}
+            <li>
+                <strong>{{ question['question'] }}</strong><br>
+                Your answer: {{ user_answer }}<br>
+                {% if feedback_text.startswith('Wrong') %}
+                    Feedback: {{ feedback_text }} The correct answer was: {{ question['answer'] }}.<br><br>
+                {% else %}
+                    Feedback: {{ feedback_text }}<br><br>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ url_for('home') }}">
+        <button>Return to Home</button>
+    </a>
+</body>
+</html>

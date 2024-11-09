@@ -3,23 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Game</title>
+    <title>Flask Quiz Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <script>
+        window.onload = function() {
+            let timeLeft = 60; // 60 seconds
+            const timerElement = document.getElementById("timer");
+
+            function updateTimer() {
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    alert('Time is up!');
+                    window.location.href = "{{ url_for('result') }}"; // Redirect to result page
+                } else {
+                    timerElement.innerText = timeLeft + " seconds remaining";
+                    timeLeft--;
+                }
+            }
+
+            let timerInterval = setInterval(updateTimer, 1000);
+        };
+    </script>
 </head>
 <body>
-    <h1>Quiz Game</h1>
+    <h1>Flask Quiz Game</h1>
+
+    <div id="timer">
+        60 seconds remaining
+    </div>
+
     <form method="POST">
         {% for question in questions %}
             <fieldset>
                 <legend>{{ question['question'] }}</legend>
                 {% set question_index = loop.index %}
                 {% for option in question['options'] %}
-                    <input type="radio" id="question_{{ question_index }}" name="question_{{ question_index }}" value="{{ option[0] }}">
+                    {% set question_key = 'question_' + loop.index|string %}
+                    <input type="radio" id="question_{{ question_index }}" name="question_{{ question_index }}" value="{{ option[0] }}"
+                        {% if request.form.get(question_key) == option[0] %} checked {% endif %}>
                     <label for="question_{{ question_index }}">{{ option }}</label><br>
                 {% endfor %}
             </fieldset>
         {% endfor %}
         <button type="submit">Submit</button>
     </form>
+    
 
     {% if score is not none %}
         <h2>Your score is: {{ score }} out of {{ total }}</h2>
