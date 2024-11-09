@@ -1,0 +1,27 @@
+[
+    {
+        "question": "What is the capital of France?",
+        "options": ["A) Berlin", "B) Paris", "C) Rome", "D) Madrid"],
+        "answer": "B"
+    },
+    {
+        "question": "What is 2 + 2?",
+        "options": ["A) 3", "B) 4", "C) 5", "D) 6"],
+        "answer": "B"
+    },
+    {
+        "question": "Who developed the theory of relativity?",
+        "options": ["A) Newton", "B) Einstein", "C) Tesla", "D) Galileo"],
+        "answer": "B"
+    },
+    {
+        "question": "What is the largest planet in our solar system?",
+        "options": ["A) Earth", "B) Mars", "C) Jupiter", "D) Venus"],
+        "answer": "C"
+    },
+    {
+        "question": "Which element has the chemical symbol 'O'?",
+        "options": ["A) Gold", "B) Oxygen", "C) Hydrogen", "D) Iron"],
+        "answer": "B"
+    }
+]
